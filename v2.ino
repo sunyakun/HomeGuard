@@ -9,9 +9,9 @@ Scanner scanner = Scanner();
 CommandParser commandParser = CommandParser();
 StaticJsonBuffer<300> jsonBuffer;
 
-String ssid = "syk";
-String password = "sunyakun";
-byte ip[] = {192,168,43,165};
+String ssid = "syk-computer";
+String password = "C1XVWRaU";
+byte ip[] = {10, 42, 0, 1};
 
 void registerSensor(int args, String* arg);
 void processResp(String resp);
@@ -28,11 +28,19 @@ void setup(){
     /*Sensor s = Sensor("co2", "54", "0");
     scanner.registerSensor(s);*/
 
+    for(int i=54; i<56; ++i)
+    {
+        pinMode(i, INPUT);
+    }
+
     commandParser.reg("register", registerSensor, 3);
+    commandParser.execute("register co 54");
+    commandParser.execute("register ch2o 55");
+    //esp.connect(ip, 80);
 }
 
 void loop(){
-    esp.connect(ip, 80);
+    esp.connect(ip, 8000);
     String jsonData = scanner.packSensorData();
     String responseBody = esp.print(jsonData);
     esp.stop();

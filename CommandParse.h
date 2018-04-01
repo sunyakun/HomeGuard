@@ -6,6 +6,9 @@
 
 typedef void (*performer)(int, String*);
 
+/*
+ * 一个链表节点，存储函数地址
+ */
 struct methodMap{
     String command;
     performer method;

@@ -5,6 +5,10 @@
 CommandParser::CommandParser(){
 
 }
+
+/*
+ * 注册一个命令
+ */
 void CommandParser::reg(String command, performer fun, int argc){
     if(maps == NULL){
         maps = new methodMap();
@@ -31,6 +35,9 @@ void CommandParser::reg(String command, performer fun, int argc){
     }
 }
 
+/*
+ * 寻找一个命令对应的函数
+ */
 methodMap* CommandParser::find(String command){
     methodMap* p = maps;
     while(p != NULL){
@@ -42,6 +49,9 @@ methodMap* CommandParser::find(String command){
     return NULL;
 }
 
+/*
+ * 从字符串中解析出命令
+ */
 String CommandParser::parseCommand(String command){
     int p = command.indexOf(" ");
     return command.substring(0, p);
@@ -52,6 +62,9 @@ String* CommandParser::parseArg(String command){
     return arg;
 }
 
+/*
+ * 执行一个命令
+ */
 void CommandParser::execute(String command){
     String com = parseCommand(command);
     //Serial.println(com);

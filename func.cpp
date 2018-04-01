@@ -2,6 +2,7 @@
 #include "func.h"
 
 String int2String(int value){
+  if(value == 0) return "0";
 	int* stack = new int[20];
 	int* top = stack;
 	String r = "";
@@ -41,8 +42,9 @@ char* parseSSID(char* res){
 
 String pack2http(String body){
 	//TODO
-	String header = "GET / HTTP/1.1\n\n";
-	String response = header + body + "\n";
+	String header = "GET /client_interface HTTP/1.1\r\nContent-Type: application/json\r\nContent-length: ";
+  header += int2String(body.length()) + "\r\n\r\n";
+	String response = header + body + "\r\n";
 	return response;
 }
 
